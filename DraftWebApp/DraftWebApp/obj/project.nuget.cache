@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "uxCJ6Ugl6Cx/g+5LKH9yBFiZEyAsatfAsjN6xMFfBTS2BNdtoyc6lDrtGvTGcLgtiQNiRgpb6c78SM+pIw7nVA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\sammo\\Documents\\MVC Draft WebApp\\Draft\\DraftWebApp\\DraftWebApp\\DraftWebApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\sammo\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

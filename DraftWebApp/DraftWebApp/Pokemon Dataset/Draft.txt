@@ -1,0 +1,33 @@
+Neil: 
+S - Kingdra - 230
+A - Arcanine - 59
+B - Politoed - 186
+C - Raticate - 20
+D - Shuckle - 213
+S - Porygon Z - 474
+A - Crobat - 169
+B - Donphan - 232
+C - Forretress - 205
+D - Seaking - 119
+Sam: 
+S - Togekiss - 468
+A - Vileplume - 45
+B - Tentacruel - 73 
+C - Dugtrio - 51
+D - Furret - 162
+S - Starmie -121 
+A - Mamoswine - 473
+B - Poliwrath - 62
+C - Pidgeot - 18
+D - Dewgong - 87
+Jamie: 
+S - Magnezone - 462
+A - Slowbro - 80
+B - Ninetails - 38
+C - Wobuffet - 202
+D - Ditto - 132
+S - Dragonite - 149
+A - Heracross - 214
+B - Honchkrow - 430
+C - Licilicki - 463
+D - Granbull - 210

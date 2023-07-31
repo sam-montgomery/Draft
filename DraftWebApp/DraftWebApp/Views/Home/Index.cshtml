@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+@if (ViewBag.Login)
+{
+    <div class="text-center">
+        <h1 class="display-4">Welcome back @ViewBag.name.</h1>
+    </div>
+    <table class="table table-bordered table-responsive table-hover">
+        <tr>
+            <th>Tier</th>
+            <th>Smogon</th>
+            <th>Name</th>
+            <th>Type 1</th>
+            <th>Type 2</th>
+            <th>Abilities</th>
+        </tr>
+        @foreach (var pkmn in ViewBag.Draft)
+        {
+            <tr>
+                <td>@pkmn.tier</td>
+                <td><img src=@pkmn.link></td>
+                <td>@pkmn.name</td>
+                <td>@pkmn.type1</td>
+                <td>@pkmn.type2</td>
+                <td>@pkmn.abilities</td>
+
+            </tr>
+        }
+    </table>
+}
+else
+{
+    using(Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        <div class="text-center">
+            <h1 class="display-4">Welcome to the Draft.</h1>
+            <p>No messin.</p>
+        </div>
+        <div>
+            Username: <input type="text" name="name" id="name" value="" />
+        </div>
+        <input type="submit" value="Submit"/>
+    }
+}
