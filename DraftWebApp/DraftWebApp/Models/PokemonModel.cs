@@ -69,7 +69,9 @@ namespace DraftWebApp.Models
         [Index(30)]
         public string tier { get; set; }
         [Index(31)]
-        public string link { get; set; }
+        public string medialink { get; set; }
+        [Index(32)]
+        public string sitelink { get; set; }
 
     }
 }

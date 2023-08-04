@@ -31,3 +31,4 @@ C:\Users\sammo\Documents\MVC Draft WebApp\Draft\DraftWebApp\DraftWebApp\obj\Debu
 C:\Users\sammo\Documents\MVC Draft WebApp\Draft\DraftWebApp\DraftWebApp\obj\Debug\net6.0\ref\DraftWebApp.dll
 C:\Users\sammo\Documents\MVC Draft WebApp\Draft\DraftWebApp\DraftWebApp\bin\Debug\net6.0\CsvHelper.dll
 C:\Users\sammo\Documents\MVC Draft WebApp\Draft\DraftWebApp\DraftWebApp\obj\Debug\net6.0\DraftWebApp.csproj.CopyComplete
+C:\Users\sammo\Documents\MVC Draft WebApp\Draft\DraftWebApp\DraftWebApp\bin\Debug\net6.0\System.Security.Permissions.dll

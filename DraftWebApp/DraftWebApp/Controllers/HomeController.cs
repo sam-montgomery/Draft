@@ -1,7 +1,10 @@
 ﻿using CsvHelper;
 using DraftWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using System;
+using System.Linq;
+using System.Web;
 using System.Diagnostics;
 using System.Formats.Asn1;
 using System.Globalization;
@@ -12,12 +15,11 @@ namespace DraftWebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         public bool login = false;
-        public List<PokemonModel> TotalDraftDex;
-        public List<PokemonModel> PlayerDraftDex;
 
         public HomeController(ILogger<HomeController> logger)
         {
-            _logger = logger;
+            PlayerModel testplayer = new PlayerModel("Scoliosis");
+            _logger = logger;   
         }
 
         public IActionResult Index()
@@ -28,20 +30,31 @@ namespace DraftWebApp.Controllers
         [HttpPost]
         public ActionResult Index(IFormCollection form)
         {
-            login = true;
-            ViewBag.Login = login;
-            ViewBag.Name = form["name"];
-            ReadDraft();
-            PlayerModel player = new PlayerModel(ViewBag.name, TotalDraftDex);
-            PlayerDraftDex = player.Draft;
-            ViewBag.Draft = PlayerDraftDex;
+            GenerateUserKey(form["name"]);
+            PokeSession.InstatiateDraft(form["name"], HttpContext.Session.GetString("__Key"));
+            return View();
+        }
+        [HttpGet]
+        [Route("Default/{pokedex_number:int}")]
+        public IActionResult Index(int pokedex_number)
+        {
+            bool removed = false;
+            foreach (PokemonModel pkmn in PokeSession.team)
+            {
+                if (pokedex_number == pkmn.pokedex_number)
+                {
+                    PokeSession.removePokemon(pokedex_number);
+                    removed = true;
+                    return View();
+                }
+            }
+            
+            if (!removed)
+                PokeSession.addPokemon(pokedex_number);
+            
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -49,18 +62,10 @@ namespace DraftWebApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
-        public List<PokemonModel> ReadDraft()
+        public void GenerateUserKey(string username)
         {
-            using (var reader = new StreamReader("Pokemon Dataset/Draft Pokemon Dataset.csv"))
-            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-            {
-                var Pokemon = csv.GetRecords<PokemonModel>();
-                Console.WriteLine(Pokemon.ToString());
-                TotalDraftDex = Pokemon.ToList();
-            }
-
-            return TotalDraftDex;
+            HttpContext.Session.SetString("__Name", username);
+            HttpContext.Session.SetString("__Key", (username + "-" + DateTime.Now.TimeOfDay.ToString()));
         }
     }
 }
