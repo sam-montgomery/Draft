@@ -1,0 +1,211 @@
+﻿@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "Home Page";
+
+
+    List<PokemonModel> draft = new List<PokemonModel>();
+    List<PokemonModel> team = new List<PokemonModel>();
+    string username = "";
+    string key = "";
+
+    var output = new Byte[20];
+    if (Context.Session.TryGetValue("__Key", out output))
+    {
+        key = Context.Session.GetString("__Key");
+        username = PokeSession.name[key];
+        draft = PokeSession.getPlayerDraft(key);
+        team = PokeSession.getPlayerTeam(key);
+
+
+        <div class="text-center">
+            <h1 class="display-4">Welcome back @username.</h1>
+        </div>
+        <div class="text-left">
+            <h2 class="display-2">Team Builder.</h2>
+        </div>
+        <table class="table table-bordered table-responsive table-hover">
+            <tr>
+                <th style="width:12%">S</th>
+                <th style="width:12%">S</th>
+                <th style="width:12%">A</th>
+                <th style="width:12%">B</th>
+                <th style="width:12%">C</th>
+                <th style="width:12%">D</th>
+            </tr>
+            <tr style="height: 15%">
+                @{
+                    if (PokeSession.spick1s[key])
+                    {
+                        <td style="text-align:center;text-justify:auto;vertical-align:central; height: 15%">
+                            <img src=@PokeSession.smon1s[key].medialink>
+                            <br>
+                            @Html.ActionLink(
+            linkText: "Remove",
+            actionName: "Index",
+            controllerName: "Home",
+            routeValues: new {@PokeSession.smon1s[key].pokedex_number},
+            htmlAttributes: null
+            )
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="text-align:center;">No S pick.</td>
+                    }
+                    if (PokeSession.spick2s[key])
+                    {
+                        <td style="text-align:center;text-justify:auto;vertical-align:central; height: 15%">
+                            <img src=@PokeSession.smon2s[key].medialink>
+                            <br>
+                            @Html.ActionLink(
+            linkText: "Remove",
+            actionName: "Index",
+            controllerName: "Home",
+            routeValues: new {@PokeSession.smon2s[key].pokedex_number},
+            htmlAttributes: null
+            )
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="text-align:center;">No S pick.</td>
+                    }
+                    if (PokeSession.apicks[key])
+                    {
+                        <td style="text-align:center;text-justify:auto;vertical-align:central; height: 15%">
+                            <img src=@PokeSession.amons[key].medialink>
+                            <br>
+                            @Html.ActionLink(
+            linkText: "Remove",
+            actionName: "Index",
+            controllerName: "Home",
+            routeValues: new {@PokeSession.amons[key].pokedex_number},
+            htmlAttributes: null
+            )
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="text-align:center;">No A pick.</td>
+                    }
+                    if (PokeSession.bpicks[key])
+                    {
+                        <td style="text-align:center;text-justify:auto;vertical-align:central; height: 15%">
+                            <img src=@PokeSession.bmons[key].medialink>
+                            <br>
+                            @Html.ActionLink(
+            linkText: "Remove",
+            actionName: "Index",
+            controllerName: "Home",
+            routeValues: new {@PokeSession.bmons[key].pokedex_number},
+            htmlAttributes: null
+            )
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="text-align:center;">No B pick.</td>
+                    }
+                    if (PokeSession.cpicks[key])
+                    {
+                        <td style="text-align:center;text-justify:auto;vertical-align:central; height: 15%">
+                            <img src=@PokeSession.cmons[key].medialink>
+                            <br>
+                            @Html.ActionLink(
+            linkText: "Remove",
+            actionName: "Index",
+            controllerName: "Home",
+            routeValues: new {@PokeSession.cmons[key].pokedex_number},
+            htmlAttributes: null
+            )
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="text-align:center;">No C pick.</td>
+                    }
+                    if (PokeSession.dpicks[key])
+                    {
+                        <td style="text-align:center;text-justify:auto;vertical-align:central; height: 15%">
+                            <img src=@PokeSession.dmons[key].medialink>
+                            <br>
+                            @Html.ActionLink(
+            linkText: "Remove",
+            actionName: "Index",
+            controllerName: "Home",
+            routeValues: new {@PokeSession.dmons[key].pokedex_number},
+            htmlAttributes: null
+            )
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="text-align:center;">No D pick.</td>
+                    }
+                }
+            </tr>
+        </table>
+        <table class="table table-bordered table-responsive table-hover" style="align-content:center">
+            <tr>
+                <th style="width:3%; text-align:center">Tier</th>
+                <th style="width:10%; text-align:center">Smogon</th>
+                <th style="width:8%; text-align:center">Name</th>
+                <th style="width:10%; text-align:center">Type 1</th>
+                <th style="width:10%; text-align:center">Type 2</th>
+                <th style="width:15%; text-align:center">Abilities</th>
+                <th style="width:8%; text-align:center">Add to Team</th>
+            </tr>
+            @foreach (var pkmn in draft)
+            {
+                <tr>
+                    <td style="text-align:center; height:50%">@pkmn.tier</td>
+                    <td style="text-align:center;"><a href=@pkmn.sitelink><img src=@pkmn.medialink></a></td>
+                    <td style="text-align:center;">@pkmn.name</td>
+                    <td style="text-align:center;">@pkmn.type1</td>
+                    <td style="text-align:center;">@pkmn.type2</td>
+                    <td style="text-align:center;">@pkmn.abilities</td>
+                    @{
+                        if (PokeSession.full[key])
+                        {
+                            <td style="text-align:center;">Team full.</td>
+                        }
+                        else
+                        {
+                            <td style="text-align:center;">
+                                @Html.ActionLink(
+                                linkText: "Add",
+                                actionName: "Index",
+                                controllerName: "Home",
+                                routeValues: new {pkmn.pokedex_number},
+                                htmlAttributes: null
+                                )
+                            </td>
+
+                        }
+                    }
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        using (Html.BeginForm("Index", "Home", FormMethod.Post))
+        {
+            <div class="text-center">
+                <h1 class="display-4">Welcome to the 2023 Johto Draft.</h1>
+                <p>Sure as shit it's here guy.</p>
+            </div>
+            <div class="text-center">
+                <img src="https://media.tenor.com/5amFHzSIuJEAAAAd/pokemon-johto.gif">
+                <p> </p>
+            </div>
+            <div class="text-center">
+                Username: <input type="text" name="name" id="name" value="" />
+                <input type="submit" value="Submit" />
+            </div>
+        }
+    }
+}
+
+
+
