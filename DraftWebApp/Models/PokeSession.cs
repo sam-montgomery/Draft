@@ -32,6 +32,12 @@ namespace DraftWebApp.Models
         public static Dictionary<string, bool> dpicks = new Dictionary<string, bool>();
         public static Dictionary<string, PokemonModel> dmons = new Dictionary<string, PokemonModel>();
 
+        //Members for team match-up logic.
+        public static Dictionary<string, Dictionary<string, float>> teamMatchupUps = new Dictionary<string, Dictionary<string, float>>();
+
+        //Bool to tell if theres any pokemon in the team. 
+        public static Dictionary<string, bool> empty = new Dictionary<string, bool>();
+
 
         //Method for populating the users team for the first time. 
         public static void InstatiateDraft(string username, string key)
@@ -43,6 +49,8 @@ namespace DraftWebApp.Models
             login[key] = true;
             name[key] = username;
             full[key] = false;
+            empty[key] = true;
+
 
             //Setting the team logic variables to allow the user to pick their team.
             spick1s[key] = false;
@@ -102,6 +110,8 @@ namespace DraftWebApp.Models
             playerDrafts[key] = draft;
             //Setting the users team to an empty list. 
             playerTeams[key] = new List<PokemonModel>();
+
+            teamMatchupUps[key] = new Dictionary<string, float>();
         }
 
         //Method for adding Pokemon to players team, contains tiering logic.
@@ -180,11 +190,14 @@ namespace DraftWebApp.Models
                     }
                 }
                 //Resetting the players team. 
+                empty[key] = false;
                 playerTeams[key] = team;
                 if (team.Count >= 6)
                     full[key] = true;
                 else
                     full[key] = false;
+
+                calculateTypeMatchup(key);
             }
         }
 
@@ -222,13 +235,46 @@ namespace DraftWebApp.Models
                         team.Remove(pkmn);
                         playerTeams[key] = team;
                         full[key] = false;
+                        if (team.Count == 0)
+                            empty[key] = true;
+                        calculateTypeMatchup(key);
                         return;
                     }
                 }
             }
         }
-        
-        
+
+        //Method for calculating type match-ups for current team members.
+        public static void calculateTypeMatchup(string key)
+        {
+            Dictionary<string, float> matchup = new Dictionary<string, float>();
+            bool first = true;
+            foreach(PokemonModel pkmn in playerTeams[key])
+            {
+                matchup["against_bug"] = first ? pkmn.against_bug : (matchup["against_bug"] *= pkmn.against_bug);
+                matchup["against_dark"] = first ? pkmn.against_dark : (matchup["against_dark"] *= pkmn.against_dark);
+                matchup["against_dragon"] = first ? pkmn.against_dragon : (matchup["against_dragon"] *= pkmn.against_dragon);
+                matchup["against_electric"] = first ? pkmn.against_electric : (matchup["against_electric"] *= pkmn.against_electric);
+                matchup["against_fairy"] = first ? pkmn.against_fairy : (matchup["against_fairy"] *= pkmn.against_fairy);
+                matchup["against_fight"] = first ? pkmn.against_fight : (matchup["against_fight"] *= pkmn.against_fight);
+                matchup["against_fire"] = first ? pkmn.against_fire : (matchup["against_fire"] *= pkmn.against_fire);
+                matchup["against_flying"] = first ? pkmn.against_flying : (matchup["against_flying"] *= pkmn.against_flying);
+                matchup["against_ghost"] = first ? pkmn.against_ghost : (matchup["against_ghost"] *= pkmn.against_ghost);
+                matchup["against_grass"] = first ? pkmn.against_grass : (matchup["against_grass"] *= pkmn.against_grass);
+                matchup["against_ground"] = first ? pkmn.against_ground : (matchup["against_ground"] *= pkmn.against_ground);
+                matchup["against_ice"] = first ? pkmn.against_ice : (matchup["against_ice"] *= pkmn.against_ice);
+                matchup["against_normal"] = first ? pkmn.against_normal : (matchup["against_normal"] *= pkmn.against_normal);
+                matchup["against_poison"] = first ? pkmn.against_poison : (matchup["against_poison"] *= pkmn.against_poison);
+                matchup["against_psychic"] = first ? pkmn.against_psychic : (matchup["against_psychic"] *= pkmn.against_psychic);
+                matchup["against_rock"] = first ? pkmn.against_rock : (matchup["against_rock"] *= pkmn.against_rock);
+                matchup["against_steel"] = first ? pkmn.against_steel : (matchup["against_steel"] *= pkmn.against_steel);
+                matchup["against_water"] = first ? pkmn.against_water : (matchup["against_water"] *= pkmn.against_water);
+                if (first)
+                    first = false;
+            }
+            teamMatchupUps[key] = matchup;
+        }
+
         //Return methods for the dictionaries.
         public static List<PokemonModel> getPlayerTeam(string key)
         {
@@ -239,7 +285,12 @@ namespace DraftWebApp.Models
         {
             return playerDrafts[key];
         }
-        
+
+        public static Dictionary<string, float> getPlayerMatchup(string key)
+        {
+            return teamMatchupUps[key];
+        }
+
         //Method for loading the pokemon dataset. 
         public static void LoadPokemon()
         {

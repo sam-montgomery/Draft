@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sammo\\Documents\\MVC Draft WebApp\\Remodelled Draft\\DraftWebApp\\DraftWebApp\\DraftWebApp.csproj": {}
+    "C:\\Users\\sammo\\Documents\\MVC Draft WebApp\\Draft\\DraftWebApp\\DraftWebApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sammo\\Documents\\MVC Draft WebApp\\Remodelled Draft\\DraftWebApp\\DraftWebApp\\DraftWebApp.csproj": {
+    "C:\\Users\\sammo\\Documents\\MVC Draft WebApp\\Draft\\DraftWebApp\\DraftWebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sammo\\Documents\\MVC Draft WebApp\\Remodelled Draft\\DraftWebApp\\DraftWebApp\\DraftWebApp.csproj",
+        "projectUniqueName": "C:\\Users\\sammo\\Documents\\MVC Draft WebApp\\Draft\\DraftWebApp\\DraftWebApp.csproj",
         "projectName": "DraftWebApp",
-        "projectPath": "C:\\Users\\sammo\\Documents\\MVC Draft WebApp\\Remodelled Draft\\DraftWebApp\\DraftWebApp\\DraftWebApp.csproj",
+        "projectPath": "C:\\Users\\sammo\\Documents\\MVC Draft WebApp\\Draft\\DraftWebApp\\DraftWebApp.csproj",
         "packagesPath": "C:\\Users\\sammo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sammo\\Documents\\MVC Draft WebApp\\Remodelled Draft\\DraftWebApp\\DraftWebApp\\obj\\",
+        "outputPath": "C:\\Users\\sammo\\Documents\\MVC Draft WebApp\\Draft\\DraftWebApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\sammo\\AppData\\Roaming\\NuGet\\NuGet.Config",

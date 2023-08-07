@@ -5,6 +5,8 @@
 
     List<PokemonModel> draft = new List<PokemonModel>();
     List<PokemonModel> team = new List<PokemonModel>();
+    bool empty = true;
+    Dictionary<string, float> matchup = new Dictionary<string, float>();
     string username = "";
     string key = "";
 
@@ -15,13 +17,14 @@
         username = PokeSession.name[key];
         draft = PokeSession.getPlayerDraft(key);
         team = PokeSession.getPlayerTeam(key);
-
+        matchup = PokeSession.getPlayerMatchup(key);
+        empty = PokeSession.empty[key];
 
         <div class="text-center">
             <h1 class="display-4">Welcome back @username.</h1>
         </div>
         <div class="text-left">
-            <h2 class="display-2">Team Builder.</h2>
+            <h4 >Team Builder.</h4>
         </div>
         <table class="table table-bordered table-responsive table-hover">
             <tr>
@@ -32,6 +35,7 @@
                 <th style="width:12%">C</th>
                 <th style="width:12%">D</th>
             </tr>
+            <div class=""></div>
             <tr style="height: 15%">
                 @{
                     if (PokeSession.spick1s[key])
@@ -145,6 +149,40 @@
                 }
             </tr>
         </table>
+
+        @if (!empty)
+        {
+            <div class="text-left">
+                <h4>Team Coverage.</h4>
+                <p>Below is the aggregate damage taken for each type, based on the weaknesses and resistances of the team selected.</p>
+            </div>
+            <div class="justify-content-xl-center" style="display:grid; grid-template-columns: 1fr 1fr 1fr; padding: 5px 5px 50px;">
+                <div class="chlid" style="text-align:center;">
+                    <img src="https://www.serebii.net/pokedex-bw/type/bug.gif" style="height: 12%"> : @matchup["against_bug"].ToString("0.00")<br />
+                    <img src="https://www.serebii.net/pokedex-bw/type/dark.gif" style="height: 12%"> : @matchup["against_dark"].ToString("0.00")<br />
+                    <img src="https://www.serebii.net/pokedex-bw/type/dragon.gif" style="height: 12%"> : @matchup["against_dragon"].ToString("0.00")<br />
+                    <img src="https://www.serebii.net/pokedex-bw/type/electric.gif" style="height: 12%"> : @matchup["against_electric"].ToString("0.00")<br />
+                    <img src="https://www.serebii.net/pokedex-bw/type/fairy.gif" style="height: 12%"> : @matchup["against_fairy"].ToString("0.00")<br />
+                    <img src="https://www.serebii.net/pokedex-bw/type/fighting.gif" style="height: 12%"> : @matchup["against_fight"].ToString("0.00")<br />
+                </div>
+                <div class="chlid" style="text-align:center;">
+                    <img src="https://www.serebii.net/pokedex-bw/type/fire.gif" style="height: 12%"> : @matchup["against_fire"].ToString("0.00")<br />
+                    <img src="https://www.serebii.net/pokedex-bw/type/flying.gif" style="height: 12%"> : @matchup["against_flying"].ToString("0.00")<br />
+                    <img src="https://www.serebii.net/pokedex-bw/type/ghost.gif" style="height: 12%"> : @matchup["against_ghost"].ToString("0.00")<br />
+                    <img src="https://www.serebii.net/pokedex-bw/type/grass.gif" style="height: 12%"> : @matchup["against_grass"].ToString("0.00")<br />
+                    <img src="https://www.serebii.net/pokedex-bw/type/ground.gif" style="height: 12%"> : @matchup["against_ground"].ToString("0.00")<br />
+                    <img src="https://www.serebii.net/pokedex-bw/type/ice.gif" style="height: 12%"> : @matchup["against_ice"].ToString("0.00")<br />
+                </div>
+                <div class="chlid" style="text-align:center;">
+                    <img src="https://www.serebii.net/pokedex-bw/type/normal.gif" style="height: 12%"> : @matchup["against_normal"].ToString("0.00")<br />
+                    <img src="https://www.serebii.net/pokedex-bw/type/poison.gif" style="height: 12%"> : @matchup["against_poison"].ToString("0.00")<br />
+                    <img src="https://www.serebii.net/pokedex-bw/type/psychic.gif" style="height: 12%"> : @matchup["against_psychic"].ToString("0.00")<br />
+                    <img src="https://www.serebii.net/pokedex-bw/type/rock.gif" style="height: 12%"> : @matchup["against_rock"].ToString("0.00")<br />
+                    <img src="https://www.serebii.net/pokedex-bw/type/steel.gif" style="height: 12%"> : @matchup["against_steel"].ToString("0.00")<br />
+                    <img src="https://www.serebii.net/pokedex-bw/type/water.gif" style="height: 12%"> : @matchup["against_water"].ToString("0.00")<br />
+                </div>
+            </div>
+        }
         <table class="table table-bordered table-responsive table-hover" style="align-content:center">
             <tr>
                 <th style="width:3%; text-align:center">Tier</th>
@@ -206,6 +244,3 @@
         }
     }
 }
-
-
-

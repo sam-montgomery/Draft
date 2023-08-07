@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6qjdGmj/BvC5XxmS6H/ZcZ/FY3MC9TDgGb4QSlyB4amtdONVTs3lr0B5Xb9yxPQ1+J9ES1X2K9cf4H+jFkf9Lg==",
+  "dgSpecHash": "OMewStuaba8lYshTEFjBN5XeXLS8HJT031hhXz585XEg3xrkB9U8LheJ31TNl7o9qn4uq91NRa/hkyIK8/DqaQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\sammo\\Documents\\MVC Draft WebApp\\Remodelled Draft\\DraftWebApp\\DraftWebApp\\DraftWebApp.csproj",
+  "projectFilePath": "C:\\Users\\sammo\\Documents\\MVC Draft WebApp\\Draft\\DraftWebApp\\DraftWebApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sammo\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
     "C:\\Users\\sammo\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\2.2.0\\microsoft.aspnetcore.cryptography.internal.2.2.0.nupkg.sha512",
